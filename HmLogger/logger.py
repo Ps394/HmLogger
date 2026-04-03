@@ -88,7 +88,7 @@ def get_logger(name: str | None = None) -> logging.Logger:
     """Get a logger with the specified name."""
     return logging.getLogger(name)
 
-def setup_logging(#
+def setup_logging(
     level=logging.INFO,
     use_colors=True,
     file_logging=False,
