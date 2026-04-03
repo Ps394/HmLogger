@@ -26,6 +26,12 @@ pip install hmlogger
 pip install -e .
 ```
 
+**Mit Test-Abhaengigkeiten:**
+
+```bash
+pip install -e .[test]
+```
+
 Nach der Installation:
 
 ```python
@@ -134,6 +140,20 @@ Verfuegbare Styles:
 
 - Bei aktivem async_logging wird ein QueueListener verwendet und per atexit sauber beendet.
 - Bei file_logging=True werden Dateien rotiert, sobald die konfigurierte Groesse erreicht ist.
+
+## Tests
+
+Tests liegen im Ordner `tests/`.
+
+```bash
+python -m pytest
+```
+
+Die Test-Abhaengigkeiten sind als optionales Extra `test` in `pyproject.toml` hinterlegt.
+
+## CI
+
+Ein GitHub-Actions-Workflow unter `.github/workflows/ci.yml` fuehrt die Tests bei Push und Pull Requests nach `main` auf Python 3.11 bis 3.13 aus.
 
 ## Lizenz
 

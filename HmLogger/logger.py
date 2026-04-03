@@ -72,17 +72,27 @@ class StyledFormatter(Formatter):
         name = Text(record.name, _name_color)
         message = Text(record.getMessage(), _message_color)
 
-        return f"{timestamp} {level} {name}: {message}"
+        result = f"{timestamp} {level} {name}: {message}"
+
+        if record.exc_info:
+            if not record.exc_text:
+                record.exc_text = self.formatException(record.exc_info)
+        if record.exc_text:
+            result += "\n" + record.exc_text
+        if record.stack_info:
+            result += "\n" + self.formatStack(record.stack_info)
+
+        return result
 
 def get_logger(name: str | None = None) -> logging.Logger:
     """Get a logger with the specified name."""
     return logging.getLogger(name)
 
-def setup_logging(
+def setup_logging(#
     level=logging.INFO,
     use_colors=True,
-    file_logging=True,
-    async_logging=True,
+    file_logging=False,
+    async_logging=False,
     log_folder="./logs",
     log_file="app.log",
     mb=5,
